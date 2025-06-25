@@ -21,22 +21,23 @@ spec:
         - containerPort: 80
         resources:
           requests:
-            memory: "256Mi"
             cpu: "250m"
+            memory: "256Mi"
           limits:
-            memory: "512Mi"
             cpu: "500m"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: php-login-service
-spec:
-  selector:
-    app: php-login
-  type: NodePort
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 80
-    nodePort: 31110
+            memory: "512Mi"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 20
+          failureThreshold: 3
+        imagePullPolicy: Always
