@@ -5,7 +5,7 @@ metadata:
   labels:
     app: php-login
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: php-login
