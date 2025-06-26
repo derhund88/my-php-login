@@ -5,7 +5,7 @@ metadata:
   labels:
     app: php-login
 spec:
-  replicas: 3
+  replicas: 4
   selector:
     matchLabels:
       app: php-login
@@ -21,11 +21,11 @@ spec:
         - containerPort: 80
         resources:
           requests:
-            cpu: "100m"
-            memory: "128Mi"
-          limits:
-            cpu: "500m"
+            cpu: "400m"
             memory: "512Mi"
+          limits:
+            cpu: "800m"
+            memory: "1024Mi"
         readinessProbe:
           httpGet:
             path: /
